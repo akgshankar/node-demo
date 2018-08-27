@@ -1,0 +1,3 @@
+- Node is Runtime and a library..
+- Allows to execute javascript code outside the browser.
+- It uses V8 runtime engine, that google chrome uses to execute js.
