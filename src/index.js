@@ -1,5 +1,6 @@
 
 import { server } from './server';
-server.start();
+import { route}  from './routes';
+server.start(route);
 
 

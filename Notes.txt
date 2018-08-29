@@ -6,4 +6,7 @@
     it requires a parameter of routes
     if no param is provided then server is up but doesn't retun anything for any request.
 
+- url and queryString are used to fetch reuest information
+    -url : used to extract parts of URL like request path and queryString.
+    -querystring : used to fetch string from request params
 
