@@ -1,3 +1,9 @@
 - Node is Runtime and a library..
 - Allows to execute javascript code outside the browser.
 - It uses V8 runtime engine, that google chrome uses to execute js.
+
+- http.createServer() is used to create http server.
+    it requires a parameter of routes
+    if no param is provided then server is up but doesn't retun anything for any request.
+
+
