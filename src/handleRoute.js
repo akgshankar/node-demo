@@ -1,9 +1,10 @@
 
 export function handleRoute(routes,routeName) {
     if (typeof routes[routeName] === 'function') {
-        routes[routeName]();
+       return routes[routeName]();
     } else {
         console.log(`No request handlers found for ${routeName}`);
+        return "404 Not found;"
     }
 }
 
