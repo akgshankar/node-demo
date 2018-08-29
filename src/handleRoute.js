@@ -1,6 +1,5 @@
-import { routes } from './routeConfig';
 
-function handleRoute(routeName) {
+export function handleRoute(routes,routeName) {
     if (typeof routes[routeName] === 'function') {
         routes[routeName]();
     } else {
