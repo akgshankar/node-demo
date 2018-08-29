@@ -13,12 +13,7 @@ function start(routes) {
         var pathname = url.parse(req.url).pathname;
         console.log(`Requested path : ${pathname}`)
 
-        var content = handleRoute(routes, pathname);
-
-        res.writeHead(200, { "Content-Type": "text/plain" });
-
-        res.write(content);
-        res.end();
+        handleRoute(routes, pathname, res);
     };
 }
 

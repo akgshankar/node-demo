@@ -12,5 +12,11 @@ Create and execute first node application.
     -Different HTTP verbs can be used for routing.
     -Need a module that can fetch informatino from URL or Request Body.
     
+##Add Handlers  for Routes
 
+##Make handlers respond.
+
+##Blockin vs Non blocking
+    -- Add some delay to start route.
+    -- Check the app respone time.
 
