@@ -7,5 +7,10 @@ Create and execute first node application.
 ##Webapp Default
 
 
+##Add routes to application
+    -Add routes and handlers
+    -Different HTTP verbs can be used for routing.
+    -Need a module that can fetch informatino from URL or Request Body.
+    
 
 
