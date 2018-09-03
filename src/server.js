@@ -1,5 +1,8 @@
 const http = require("http");
 const url = require("url");
+const util = require("util");
+const formidable = require("formidable");
+
 import { handleRoute } from './handleRoute';
 
 function start(routes) {
@@ -10,10 +13,27 @@ function start(routes) {
     })
 
     function appRequest(req, res) {
+        var postData = "";
         var pathname = url.parse(req.url).pathname;
         console.log(`Requested path : ${pathname}`)
 
-        handleRoute(routes, pathname, res);
+        if (req.url == '/upload' && req.method.toLowerCase() == 'post') {
+            var form = new formidable.IncomingForm();
+            form.parse(req, function (err, fields, files) {
+                res.writeHead(200, { 'content-type': 'text/plain' });
+                res.write('received upload:\n\n');
+                res.end(util.inspect({ fields: fields, files: files }));
+            });
+            return;
+        }
+        req.setEncoding("utf-8");
+        req.addListener("data", function (postDataChunk) {
+            postData += postDataChunk;
+            console.log(`Received Post Data Chund ${postDataChunk}`);
+        })
+        req.addListener("end", function () {
+            handleRoute(routes, pathname, res, postData);
+        })
     };
 }
 
