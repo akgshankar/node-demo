@@ -10,3 +10,15 @@
     -url : used to extract parts of URL like request path and queryString.
     -querystring : used to fetch string from request params
 
+
+- Hadling POST calls node server raised few events to make asynchronous processing.
+    -NodeJs serves code in small chunks
+    -callbacks are called on events like "data" (a new data chunk arrives) or "end"(all chunks are received)
+    -Use formidable module for incoming form details.
+
+## Add wxternal config for webpack formidable crypto type error
+    externals: [
+        {
+            formidable: 'commonjs formidable',
+        },
+    ],

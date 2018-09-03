@@ -7,14 +7,19 @@ module.exports = {
     watch: true,
     devtool: 'sourcemap',
     target: 'node',
-    mode:"development",
+    mode: "development",
     node: {
         __filename: true,
         __dirname: true
-      },
+    },
     module: {
         rules: [
-            { test: /\.js$/, use: "babel-loader" , exclude: /node_modules/}
+            { test: /\.js$/, use: "babel-loader", exclude: /node_modules/ }
         ]
-    }
+    },
+    externals: [
+        {
+            formidable: 'commonjs formidable',
+        },
+    ],
 }
