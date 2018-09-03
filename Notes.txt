@@ -22,3 +22,5 @@
             formidable: 'commonjs formidable',
         },
     ],
+
+#Pass req to route handlers to fecth some information reuired at the route;

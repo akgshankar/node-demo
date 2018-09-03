@@ -1,5 +1,6 @@
 const querystring = require("querystring");
 const fs = require("fs");
+const formidable = require("formidable");
 
 export function start(response) {
     console.log("Request handler 'start' was called.");
@@ -14,11 +15,29 @@ export function start(response) {
     response.end();
 }
 
-export function upload(response, postData) {
+export function upload(response, request) {
     console.log("Request handler 'upload' was called.");
-    response.writeHead(200, { "Content-Type": "text/plain" });
-    response.write(`You have send : ${querystring.parse(postData).text}`);
-    response.end();
+    var form = new formidable.IncomingForm();
+    console.log("about to parse");
+
+    form.parse(request, function (error, fields, files) {
+        console.log("parsing done");
+        /* Possible error on Windows systems: tried to rename to an already existing file */
+        fs.rename(files.upload.path, __dirname + "/tmp/test.png", function (error) {
+            if (error) {
+                fs.unlink(__dirname + "/tmp/test.png");
+                fs.rename(files.upload.path, __dirname + "/tmp/test.png");
+            }
+        });
+
+        response.writeHead(200, { "Content-Type": "text/plain" });
+        //response.write(`You have send : ${querystring.parse(postData).text}`);
+        response.write("received image:<br/>");
+        response.write("<img src='/showimage' />");
+        response.end();
+    })
+
+
 }
 
 export function about(response) {
@@ -62,7 +81,7 @@ export function uploadForm(response) {
     <meta http-equiv="Content-Type" content="text/html" charset=UTF-8" />
     </head>
     <body>
-    <form action="/upload" method="post">
+    <form action="/upload" enctype="multipart/form-data" method="post">
     <div>
         <input type="text" name="title">
         <input type="file" name="upload" multiple="multiple">
@@ -78,7 +97,7 @@ export function uploadForm(response) {
 
 export function showImage(response, postData) {
     console.log("Request handler 'show' was called.");
-    fs.readFile("/tmp/test.png", "binary", function (error, file) {
+    fs.readFile(__dirname + "/tmp/test.png", "binary", function (error, file) {
         if (error) {
             response.writeHead(500, { "Content-Type": "text/plain" });
             response.write(error + "\n");

@@ -1,10 +1,10 @@
 
-export function handleRoute(routes,routeName,response,postData) {
+export function handleRoute(routes, routeName, response, request) {
     if (typeof routes[routeName] === 'function') {
-       return routes[routeName](response,postData);
+        return routes[routeName](response, request);
     } else {
         console.log(`No request handlers found for ${routeName}`);
-        response.writeHead(404, {"Content-Type": "text/plain"});
+        response.writeHead(404, { "Content-Type": "text/plain" });
         response.write("404 Not found");
         response.end();
     }
